@@ -23,7 +23,7 @@ public class Ship extends ModelInstance {
 	public int lives = 3;
 	public boolean isExploding = false;
 	public float explodeTime = 0;
-
+    public float angle = 0;
 	public Ship (Model model) {
 		super(model);
 	}
@@ -36,5 +36,6 @@ public class Ship extends ModelInstance {
 				explodeTime = 0;
 			}
 		}
+        angle += (180 * delta);
 	}
 }

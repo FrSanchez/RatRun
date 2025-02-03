@@ -15,6 +15,7 @@ package com.sanchezparralabs.ratrun.screens;
 
 import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.controllers.ControllerAdapter;
 import com.badlogic.gdx.graphics.Color;
@@ -48,6 +49,7 @@ public class MainMenu extends InvadersScreen {
 	private final Matrix4 transformMatrix = new Matrix4();
 
 	private final GlyphLayout glyphLayout = new GlyphLayout();
+    private Class _next = null;
 
 	public MainMenu (Invaders invaders) {
 		super(invaders);
@@ -73,6 +75,8 @@ public class MainMenu extends InvadersScreen {
 		}
 	}
 
+    public Class getNext() { return _next; }
+
 	@Override
 	public boolean isDone () {
 		return isDone;
@@ -80,10 +84,15 @@ public class MainMenu extends InvadersScreen {
 
 	@Override
 	public void update (float delta) {
-		if (Gdx.input.justTouched()) {
-			isDone = true;
-		}
-	}
+        if (Gdx.input.isButtonJustPressed(Input.Buttons.RIGHT)) {
+            isDone = true;
+            _next = GameLoop.class;
+        }
+        if (Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)) {
+            isDone = true;
+            _next = Basic3D.class;
+        }
+    }
 
 	@Override
 	public void draw (float delta) {

@@ -42,10 +42,10 @@ public class Simulation implements Disposable {
 	public final static float PLAYFIELD_MIN_Z = -15;
 	public final static float PLAYFIELD_MAX_Z = 2;
 
-	public ArrayList<Invader> invaders = new ArrayList<Invader>();
-	public ArrayList<Block> blocks = new ArrayList<Block>();
-	public ArrayList<Shot> shots = new ArrayList<Shot>();
-	public ArrayList<Explosion> explosions = new ArrayList<Explosion>();
+	public ArrayList<Invader> invaders = new ArrayList<>();
+	public ArrayList<Block> blocks = new ArrayList<>();
+	public ArrayList<Shot> shots = new ArrayList<>();
+	public ArrayList<Explosion> explosions = new ArrayList<>();
 	public Ship ship;
 	public Shot shipShot = null;
 	public transient SimulationListener listener;
@@ -59,8 +59,8 @@ public class Simulation implements Disposable {
 	public Model shotModel;
 	public Model explosionModel;
 
-	private final ArrayList<Shot> removedShots = new ArrayList<Shot>();
-	private final ArrayList<Explosion> removedExplosions = new ArrayList<Explosion>();
+	private final ArrayList<Shot> removedShots = new ArrayList<>();
+	private final ArrayList<Explosion> removedExplosions = new ArrayList<>();
 
 	private final Vector3 tmpV1 = new Vector3();
 	private final Vector3 tmpV2 = new Vector3();
@@ -335,7 +335,7 @@ public class Simulation implements Disposable {
 	public void moveShipRight (float delta, float scale) {
 		if (ship.isExploding) return;
 
-		ship.transform.trn(+delta * Ship.SHIP_VELOCITY * scale, 0, 0);
+		ship.transform.trn(delta * Ship.SHIP_VELOCITY * scale, 0, 0);
 		ship.transform.getTranslation(tmpV1);
 		if (tmpV1.x > PLAYFIELD_MAX_X) ship.transform.trn(PLAYFIELD_MAX_X - tmpV1.x, 0, 0);
 	}

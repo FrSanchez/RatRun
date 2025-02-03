@@ -6,6 +6,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputAdapter;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.controllers.ControllerAdapter;
@@ -16,6 +17,8 @@ import com.sanchezparralabs.ratrun.screens.GameLoop;
 import com.sanchezparralabs.ratrun.screens.GameOver;
 import com.sanchezparralabs.ratrun.screens.InvadersScreen;
 import com.sanchezparralabs.ratrun.screens.MainMenu;
+
+import java.lang.reflect.InvocationTargetException;
 
 
 ///** {@link com.badlogic.gdx.Game} implementation shared by all platforms. */
@@ -62,7 +65,21 @@ public class Invaders extends Game {
             // if the current screen is a main menu screen we switch to
             // the game loop
             if (currentScreen instanceof MainMenu) {
-                setScreen(new GameLoop(this));
+                var next = ((MainMenu) currentScreen).getNext();
+                if (next != null) {
+                    try {
+                        setScreen((Screen) next.getConstructor(Invaders.class).newInstance(this));
+                    } catch (InstantiationException e) {
+                        throw new RuntimeException(e);
+                    } catch (IllegalAccessException e) {
+                        throw new RuntimeException(e);
+                    } catch (InvocationTargetException e) {
+                        throw new RuntimeException(e);
+                    } catch (NoSuchMethodException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+//                setScreen(new GameLoop(this));
             } else {
                 // if the current screen is a game loop screen we switch to the
                 // game over screen
@@ -76,7 +93,7 @@ public class Invaders extends Game {
             }
         }
 
-         fps.log();
+//         fps.log();
     }
 
     @Override
