@@ -25,6 +25,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.JsonReader;
 import com.sanchezparralabs.ratrun.Invaders;
+import com.sanchezparralabs.ratrun.TestShader;
 import com.sanchezparralabs.ratrun.simulation.Ship;
 
 public class Basic3D extends InvadersScreen {
@@ -64,9 +65,10 @@ public class Basic3D extends InvadersScreen {
 //        renderable.meshPart.primitiveType = GL20.GL_POINTS;
 
         renderContext = new RenderContext(new DefaultTextureBinder(DefaultTextureBinder.LRU, 1));
-        String vert = Gdx.files.internal("data/shaders/test.vertex.glsl").readString();
-        String frag = Gdx.files.internal("data/shaders/test.fragment.glsl").readString();
-        shader = new DefaultShader(renderable, new DefaultShader.Config(vert, frag));
+        shader = new TestShader();
+//        String vert = Gdx.files.internal("data/shaders/test.vertex.glsl").readString();
+//        String frag = Gdx.files.internal("data/shaders/test.fragment.glsl").readString();
+//        shader = new DefaultShader(renderable, new DefaultShader.Config(vert, frag));
         shader.init();
     }
 
